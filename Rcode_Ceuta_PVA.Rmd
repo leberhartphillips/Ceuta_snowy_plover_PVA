@@ -4,19 +4,19 @@ title: 'R-code for "The plight of a plover: viability of an important Snowy Plov
 author: Luke J. Eberhart-Phillips, Medardo Cruz-López, Guillermo Fernández, Rene Beamonte-Barrientos, Tamás Székely, Martín Alejandro Serrano-Meneses, and Clemens Küpper
 output:
   pdf_document: 
-    fig_height: 5
-    fig_width: 5
+    fig_height: 3
+    fig_width: 3
   html_document:
     highlight: pygments
 ---
 ```{r, echo = FALSE}
-knitr::opts_chunk$set(collapse = TRUE, comment = "#>", cache = TRUE, warning = FALSE)
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", cache = TRUE, warning = FALSE, fig.align='center')
 ```
 In this document we provide all the necessary code for reproducing the analyses presented in our paper.  To access the dataset and Rmarkdown file, please download this [GitHub](https://github.com/leberhartphillips/Ceuta_snowy_plover_PVA) repository.  Simply follow the link and click on *Download ZIP* on the right-hand side of the page.  An explanation of the files in the repository can be found in the Readme file.  Please don't hesitate to contact Luke at `luke.eberhart[at]gmail.com` if you have any questions.
 
 **Prerequisites:**
 
-* For running the complete code you need a `files` subfolder containing the raw data downloaded from `Data_files` folder provided in the  [GitHub](https://github.com/leberhartphillips/killdeer_foraging) repository.
+* For running the complete code you need a `files` subfolder containing the raw data downloaded from `Data_files` folder provided in the  [GitHub](https://github.com/leberhartphillips/Ceuta_snowy_plover_PVA) repository.
 * The following packages are needed for analysis and can be easily installed from [CRAN](http://cran.r-project.org/) by uncommenting the `install.packages` functions:
 
 ```{r, results="hide", message=FALSE, cache = TRUE}
@@ -50,7 +50,7 @@ library(popbio)
 
 ***Explaination of datasets:***
 
-- **nest_fate.txt**: each row is a single nest. Definitions of variables:  
+**nest_fate.txt**: each row is a single nest. Definitions of variables:  
 *FirstFound* -- Day of the season when nest was found  
 *LastPresent* -- Last day of the season the nest was seen alive  
 *LastChecked* -- Last day of the season the nest was checked  
@@ -59,25 +59,25 @@ before 25th day of incubation
 *Freq* -- Frequency of nests with these data  
 *NestAge* -- Age of a nest on the first occasion  
 *Year* -- Year that nest was monitored (between 2006 and 2012)  
-*std_time* -- Standardized laying date (earlier than average nests are
+*std_time* -- Standardized laying date (early nests are
 negative, late nests are positive). Note: maximum duration of
 breeding season is 85 days.  
 
-- **chick_data.txt**: each row is a single individual. Definitions of
+**chick_data.txt**: each row is a single individual. Definitions of
 variables:  
 *ch* -- capture history of a given chick over the brooding period. 1 = seen, 
-0 = not seen, . = no survey effort given on that day (no data)  
-*Year* -- Year that chick was monitored (between 2006 and 2012)  
-*Day_of_Season* -- Day of season that chick hatched  
+0 = not seen, . = no survey effort given on that day (i.e. no data)  
+*Year* -- Year the chick was monitored (between 2006 and 2012)  
+*Day_of_Season* -- Day of season the chick hatched  
 
-- **fledgling_adult_data.txt**: each row is a single individual. Definitions of
+**fledgling_adult_data.txt**: each row is a single individual. Definitions of
 variables:  
 *ch* -- capture history of a given individual each year between 2006 and 2012.
 1 = seen, 0 = not seen  
-*age*-- Adult or juvenile [NOTE: this describes the stage that the individual
-was initially ringed]  
+*age* -- Adult (A) or fledgling (J). Note: this describes the stage that the individual
+was initially ringed.  
 
-- **fecundity_data.txt**: each row is a single male. Definitions of variables:  
+**fecundity_data.txt**: each row is a single male. Definitions of variables:  
 *Year* -- Year of data collection (between 2006 and 2012)  
 *Bird_ID* -- Unique number assigned to each male individual  
 *Eggs* -- number of eggs tended by a given male in a given year  
@@ -543,8 +543,8 @@ colnames(Year_Adult_reals) <-
   c("Year", "Year_apparent", "Year_apparent_lcl", "Year_apparent_ucl", "Age")
 ```
 
-## Vizualize annual variation in stage-specific survival (Figure 1b)
-```{r, results="hide", message=FALSE, cache = TRUE}
+## Vizualize annual variation in stage-specific survival
+```{r, results="hide", message=FALSE, cache = TRUE, fig.height=6}
 # combine all estimates into one dataframe
 All_survival_rates <- 
   rbind(Yearly_nest_survival_avgs, Chick_survival_reals, 
@@ -578,7 +578,8 @@ All_survival_rates_plot <-
     scale_colour_manual(values=cbPalette, name="Age") +
     scale_fill_manual(values=cbPalette, name="Age") +
     ylab("Apparent survival (± 95% CI)") +
-    facet_wrap(~ Age, ncol = 1)
+    facet_wrap(~ Age, ncol = 1) +
+    scale_y_continuous(limits = c(0, 1))
 All_survival_rates_plot
 ```
 
@@ -1159,7 +1160,7 @@ x_melt$Vital_rate <-
          levels = c("Egg", "Chick", "Fledg.", "Adult", "Fecund."))
 x_melt$variable <- ifelse(x_melt$variable == "sensitivity", "Sensitivity", "Elasticity")
 cbPalette <- c("#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e")
-Sensitivity_Elasticity_histogram <- 
+Sensitivity_Elasticity_plot <- 
   ggplot(x_melt, aes(x = Vital_rate, y = value, fill = variable)) +  
     theme_bw() +
     geom_bar(stat = "identity", position = position_dodge()) +
@@ -1182,6 +1183,7 @@ Sensitivity_Elasticity_histogram <-
           axis.ticks.y = element_line(size = 0.2, colour = "grey40")) +
     xlab("Vital rate") +
     ylab("Sensitivity or elasticity of population growth rate") +
-    scale_fill_brewer(palette = "Set1")
-Sensitivity_Elasticity_histogram
+    scale_fill_brewer(palette = "Set1") +
+    scale_y_continuous(limits = c(0, 1))
+Sensitivity_Elasticity_plot
 ```
