@@ -1,7 +1,7 @@
 ---
 title: 'The plight of a plover: viability of an important Snowy Plover population
   with flexible brood care in Mexico'
-author: Luke J. Eberhart-Phillips, Medardo Cruz-López, Guillermo Fernández, Rene Beamonte-Barrientos, Tamás Székely, Martín Alejandro Serrano-Meneses, and Clemens Küpper
+authors: Luke J. Eberhart-Phillips, Medardo Cruz-López, Guillermo Fernández, Rene Beamonte-Barrientos, Tamás Székely, Martín Alejandro Serrano-Meneses, and Clemens Küpper
 output:
   pdf_document: 
     fig_height: 5
