@@ -1,7 +1,7 @@
 ---
-title: 'The plight of a plover: viability of an important Snowy Plover population
-  with flexible brood care in Mexico'
-authors: Luke J. Eberhart-Phillips, Medardo Cruz-López, Guillermo Fernández, Rene Beamonte-Barrientos, Tamás Székely, Martín Alejandro Serrano-Meneses, and Clemens Küpper
+title: 'R-code for "The plight of a plover: viability of an important Snowy Plover population
+  with flexible brood care in Mexico"'
+author: Luke J. Eberhart-Phillips, Medardo Cruz-López, Guillermo Fernández, Rene Beamonte-Barrientos, Tamás Székely, Martín Alejandro Serrano-Meneses, and Clemens Küpper
 output:
   pdf_document: 
     fig_height: 5
@@ -12,7 +12,6 @@ output:
 ```{r, echo = FALSE}
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>", cache = TRUE, warning = FALSE)
 ```
-
 In this document we provide all the necessary code for reproducing the analyses presented in our paper.  To access the dataset and Rmarkdown file, please download this [GitHub](https://github.com/leberhartphillips/Ceuta_snowy_plover_PVA) repository.  Simply follow the link and click on *Download ZIP* on the right-hand side of the page.  An explanation of the files in the repository can be found in the Readme file.  Please don't hesitate to contact Luke at `luke.eberhart[at]gmail.com` if you have any questions.
 
 **Prerequisites:**
