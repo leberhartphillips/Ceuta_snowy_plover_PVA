@@ -1,5 +1,5 @@
 # Overview
-## The plight of a plover: viability of an important Snowy Plover population
+## The plight of a plover: viability of an important Snowy Plover population with flexible brood care in Mexico
 #### Luke J. Eberhart-Phillips, Medardo Cruz-López, Guillermo Fernández, Rene Beamonte-Barrientos, Tamás Székely, Martín Alejandro Serrano-Meneses, and Clemens Küpper
 
 In this repository you can find all the necessary files needed to reproduce the analyses presented in our paper.
@@ -16,23 +16,23 @@ before 25th day of incubation
 *Freq* -- Frequency of nests with these data  
 *NestAge* -- Age of a nest on the first occasion  
 *Year* -- Year that nest was monitored (between 2006 and 2012)  
-*std_time* -- Standardized laying date (earlier than average nests are
+*std_time* -- Standardized laying date (early nests are
 negative, late nests are positive). Note: maximum duration of
 breeding season is 85 days.  
 
     + **chick_data.txt**: each row is a single individual. Definitions of
 variables:  
 *ch* -- capture history of a given chick over the brooding period. 1 = seen, 
-0 = not seen, . = no survey effort given on that day (no data)  
-*Year* -- Year that chick was monitored (between 2006 and 2012)  
-*Day_of_Season* -- Day of season that chick hatched  
+0 = not seen, . = no survey effort given on that day (i.e. no data)  
+*Year* -- Year the chick was monitored (between 2006 and 2012)  
+*Day_of_Season* -- Day of season the chick hatched  
 
     + **fledgling_adult_data.txt**: each row is a single individual. Definitions of
 variables:  
 *ch* -- capture history of a given individual each year between 2006 and 2012.
 1 = seen, 0 = not seen  
-*age* -- Adult or juvenile [NOTE: this describes the stage that the individual
-was initially ringed]  
+*age* -- Adult (A) or fledgling (J). Note: this describes the stage that the individual
+was initially ringed.  
 
     + **fecundity_data.txt**: each row is a single male. Definitions of variables:  
 *Year* -- Year of data collection (between 2006 and 2012)  
